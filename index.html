@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Design Engineering: All What You Need — Open-source directory of 600+ curated resources across 24 categories for design engineers." />
+  <title>Design Engineering: All What You Need (600+ Resources)</title>
+  <style>
+    :root {
+      --bg: #090a0f;
+      --bg-elevated: #11131c;
+      --bg-card: #151824;
+      --bg-card-hover: #1c2030;
+      --border: #23283b;
+      --border-hover: #3b4363;
+      --text: #f3f4f8;
+      --text-muted: #949ab1;
+      --text-subtle: #646b85;
+      --accent: #6366f1;
+      --accent-soft: rgba(99, 102, 241, 0.14);
+      --accent-border: rgba(99, 102, 241, 0.45);
+      --star: #f59e0b;
+      --radius: 12px;
+      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    }
+
+    html.light {
+      --bg: #f8fafc;
+      --bg-elevated: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --border: #e2e8f0;
+      --border-hover: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #64748b;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.08);
+      --accent-border: rgba(79, 70, 229, 0.35);
+      --star: #d97706;
+      --shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Oxygen, Ubuntu, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 18px 24px 12px;
+    }
+
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.03em;
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .total-pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex: 1;
+      justify-content: flex-end;
+      min-width: 280px;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 380px;
+      min-width: 210px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-subtle);
+      pointer-events: none;
+      width: 16px;
+      height: 16px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 9px 66px 9px 36px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--text);
+      font-size: 13.5px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .search-kbd {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--text-subtle);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 5px;
+      pointer-events: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+
+    .btn.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: var(--accent-border);
+    }
+
+    /* Category Tabs Bar */
+    .tabs-bar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .tabs-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .tabs-container.wrap-tabs {
+      flex-wrap: wrap;
+      overflow-x: visible;
+    }
+
+    .tabs-container::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    .tabs-container::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 999px;
+    }
+
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 13px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+    }
+
+    .tab-count {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-subtle);
+    }
+
+    html.light .tab-count {
+      background: rgba(15, 23, 42, 0.06);
+    }
+
+    .tab-btn.active .tab-count {
+      background: rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+    }
+
+    /* Main Content */
+    .main {
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px;
+      flex: 1;
+    }
+
+    .category-banner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding: 16px 20px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .category-info h2 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .category-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .category-nav-btns {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Grid & List Views */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+    }
+
+    .resources-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      box-shadow: var(--shadow);
+    }
+
+    .resources-list .card {
+      flex-direction: row;
+      align-items: center;
+      padding: 11px 16px;
+      gap: 16px;
+    }
+
+    .resources-list .card:hover {
+      transform: none;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .resources-list .card-top {
+      align-items: center;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .favicon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    .resources-list .favicon-box {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+    }
+
+    .favicon-box img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    .card-title-wrap {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-domain {
+      font-size: 12px;
+      color: var(--text-subtle);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .star-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-subtle);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .star-btn:hover {
+      color: var(--star);
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    .star-btn.starred {
+      color: var(--star);
+    }
+
+    .external-icon {
+      color: var(--text-subtle);
+      width: 15px;
+      height: 15px;
+      transition: transform 0.15s, color 0.15s;
+    }
+
+    .card:hover .external-icon {
+      color: var(--accent);
+      transform: translate(2px, -2px);
+    }
+
+    .card-desc {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .resources-list .card-desc {
+      margin-top: 0;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-footer {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .resources-list .card-footer {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+      flex-shrink: 0;
+    }
+
+    .cat-tag {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .cat-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .extra-link {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      padding: 2px 8px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .extra-link:hover {
+      text-decoration: underline;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 64px 20px;
+      background: var(--bg-elevated);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      color: var(--text-muted);
+    }
+
+    .empty-state h3 {
+      font-size: 17px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-subtle);
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        padding: 14px 16px 10px;
+      }
+      .main {
+        padding: 16px;
+      }
+      .resources-list .card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .resources-list .card-desc {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="top-bar">
+        <div class="brand">
+          <div class="brand-badge">DE</div>
+          <div>
+            <div class="brand-title">
+              Design Engineering: All What You Need
+              <span class="total-pill" id="totalCountBadge">601 resources</span>
+            </div>
+            <div class="brand-subtitle">Curated tools, inspiration, design systems, shaders, UI kits &amp; publications across 24 categories</div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="search-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="search"
+              id="searchInput"
+              class="search-input"
+              placeholder="Search 600+ resources, domains, or notes..."
+              autocomplete="off"
+            />
+            <span class="search-kbd">/</span>
+          </div>
+
+          <button class="btn" id="wrapTabsBtn" title="Toggle wrapping all category tabs vs horizontal scroll">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span>Wrap Tabs</span>
+          </button>
+
+          <button class="btn" id="viewModeBtn" title="Switch between Grid and Compact List view">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span id="viewModeLabel">List View</span>
+          </button>
+
+          <a
+            href="https://github.com/atwalabs/design-engineering-all-what-you-need"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn"
+            style="text-decoration: none;"
+            title="View Open-Source Repository on GitHub"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+
+          <button class="btn" id="themeBtn" title="Toggle Dark / Light Theme">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="themeIcon">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Tabs (1 tab for each category + All + Saved) -->
+      <nav class="tabs-container wrap-tabs" id="tabsContainer" aria-label="Resource Categories"></nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="category-banner">
+      <div class="category-info">
+        <h2 id="activeCategoryTitle">Inspiration</h2>
+        <p id="activeCategoryStats">Showing 72 resources</p>
+      </div>
+      <div class="category-nav-btns">
+        <button class="btn" id="prevCatBtn" title="Previous Category (Left Arrow)">← Prev Tab</button>
+        <button class="btn" id="nextCatBtn" title="Next Category (Right Arrow)">Next Tab →</button>
+        <button class="btn" id="randomBtn" title="Open a random resource from current view">🎲 Surprise Me</button>
+      </div>
+    </div>
+
+    <div id="resourcesContainer" class="resources-grid"></div>
+  </main>
+
+  <footer class="footer">
+    Design Engineering: All What You Need • Open Source on <a href="https://github.com/atwalabs/design-engineering-all-what-you-need" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none;">GitHub</a> • Use <kbd>/</kbd> to search, <kbd>←</kbd> <kbd>→</kbd> to switch category tabs, and ★ to bookmark resources locally.
+  </footer>
+
+  <script id="raw-directory-data" type="text/plain">
+===Inspiration
+[60fps](https://60fps.design/)
+[A1](https://www.a1.gallery/)
+[Appinspo](https://www.appinspo.com/)
+[Are.na](http://are.na/)
+[Awwwards](https://www.awwwards.com/)
+[Behance](https://www.behance.net/)
+[Best SaaS Web Designs](https://bestsaaswebdesigns.com/)
+[Best Website Gallery](https://bestwebsite.gallery/)
+[bestdesignsonx.com](http://bestdesignsonx.com/)
+[Betwn Studios](https://betwnstudios.com/)
+[Browse.cool](http://browse.cool/)
+[Collect UI](https://collectui.com/)
+[Cosmos](https://www.cosmos.so/)
+[cta.gallery](http://cta.gallery/)
+[Curated Design](https://www.curated.design/)
+[Curated Domains](https://curated.domains/)
+[Dark Mode Design](https://www.darkmodedesign.com/)
+[deck.gallery](http://deck.gallery/)
+[designeng.tools](http://designeng.tools/)
+[designspells.com](http://designspells.com/): micro-interactions and little UI moments
+[Designspiration](https://www.designspiration.com/)
+[Detail Design](https://detail.design/)
+[Details](https://www.details.so/)
+[Dribbble](https://dribbble.com/)
+[Early](https://www.early.tools/)
+[Everywhere Tools](https://everywhere.tools/)
+[Flowbase](https://www.flowbase.co/)
+[footer.design](http://footer.design/)
+[godly.website](http://godly.website/): beautiful sites, hand-picked
+[Great Apps](https://greatapps.fyi/)
+[GreatStuff](https://greatstuff.fyi/)
+[Hover States](https://hoverstat.es/)
+[Imageory](https://www.imageory.in/)
+[Inspiration Grid](https://theinspirationgrid.com/)
+[inspora.design](http://inspora.design/)
+[Jessy In's Gallery](https://gallery.jessyin.world/)
+[land-book.com](http://land-book.com/): landing pages
+[Landdding](https://landdding.com/)
+[Landing Love](https://landing.love/)
+[Landingfolio](https://www.landingfolio.com/)
+[Lapa Ninja](https://www.lapa.ninja/)
+[Layers](https://layers.to/)
+[Loader Buttons](https://loader-buttons.appllama.io/)
+[loadmo.re](http://loadmo.re/)
+[Logosystem](https://logosystem.co/)
+[minimal.gallery](http://minimal.gallery/): high-end sites, no noise
+[Mobbin](https://mobbin.com/signup?via=fons)
+[mobbin.com](http://mobbin.com/): real mobile app flows
+[Motionimo](https://motionimo.xyz/)
+[navbar.design](http://navbar.design/)
+[navbar.gallery](http://navbar.gallery/)
+[OGimage.gallery](http://ogimage.gallery/)
+[One Page Love](https://onepagelove.com/)
+[OpenAlternative](https://openalternative.co/)
+[Pinterest](https://www.pinterest.com/)
+[posts.design](http://posts.design/)
+[Rebrand Gallery](https://rebrand.gallery/)
+[Recent Design](https://recent.design/)
+[SaaS Landing Page](https://saaslandingpage.com/)
+[saaspo.com](http://saaspo.com/): SaaS landing pages
+[savee.com](http://savee.com/): a moodboard tool for visual references
+[Screenlane](https://screenlane.com/)
+[Sections.wtf](http://sections.wtf/)
+[SEESAW](https://www.seesaw.website/)
+[siteinspire.com](http://siteinspire.com/): long-running web design showcase
+[Sombra](https://sombra.design/)
+[Supahero](https://supahero.io/)
+[Swiped](https://swiped.design/)
+[UX Archive](https://uxarchive.com/)
+[Wall of Portfolios](https://www.wallofportfolios.in/)
+[What Ships](https://whatships.com/)
+[wwwtf.site](http://wwwtf.site/)
+===Resource Directories
+[AI Stack](https://github.com/alp82/aistack)
+[Catalog](https://catalog.design/): Design resource directory from Studio Offgrid.
+[desengs.com](http://desengs.com/)
+[Design Bookmark](https://designbookmark.com/)
+[Design Books](https://design-books.com/)
+[Designeer](https://www.designeer.xyz/): Design and development resource directory.
+[designengineer.tools](http://designengineer.tools/)
+[Directory](https://mockups.directory/collections/all)
+[Folios Gallery](https://folios.gallery/)
+[Insposite](https://www.insposite.com/)
+[isthereanytool](https://isthereanytool.app/)
+[Pttrns](https://pttrns.com/)
+[Recent Skills](https://recent.design/skills)
+[skills.sh](http://skills.sh/)[Design & UI skills](https://skills.sh/topic/design)|
+===Design Systems
+[checklist.design](http://checklist.design/): checklists for forms, nav, onboarding and more
+[component.gallery](http://component.gallery/): how top design systems solve the same component
+[Design System Checklist](https://designsystemchecklist.com/)
+[Design Systems Surf](https://designsystems.surf/)
+[Design Tokens Generator](https://design.dev/ai/design-tokens-generator/)
+[design.dev](http://design.dev/)
+[fontpair.co](http://fontpair.co/): Google Fonts pairings, ready to use
+[lawsofux.com](http://lawsofux.com/): the psychology behind good interfaces
+[Ramps](https://www.ramps.studio/)
+[styles.refero.design](http://styles.refero.design/): real product styles
+[typewolf.com](http://typewolf.com/): type pairings that work
+===Brand Assets
+[Backgrounds Supply](https://backgrounds.supply/)
+[coolors.co](http://coolors.co/): palettes in seconds
+[Curations](https://curations.supply/)
+[fontshare.com](http://fontshare.com/): free, good-looking fonts
+[haikei.app](http://haikei.app/): generated SVG backgrounds and shapes
+[lucide.dev](http://lucide.dev/): clean open-source icons
+[Midjourney](https://midjourney.com/)
+[radix-ui.com/colors](http://radix-ui.com/colors): accessible color scales
+[realtimecolors.com](http://realtimecolors.com/): preview a palette on a real page
+[svgl.app](http://svgl.app/): brand logos as SVG
+[Venust Backgrounds](https://backgrounds.venust.ai/)
+===Typography + Fonts
+[205TF](https://205.tf/)
+[A2 Type](https://a2-type.co.uk/)
+[Alphabet](https://alphabetspatricknell.com/)
+[Blaze Type](https://blazetype.eu/)
+[Boulevard Lab](https://www.boulevardtype.com/)
+[Departure Mono](https://departuremono.com/)
+[Dinamo](https://abcdinamo.com/)
+[Displaay](https://displaay.net/)
+[Fontsource](https://fontsource.org/)
+[Grilli Type](https://grillitype.com/)
+[Klim](https://klim.co.nz/)
+[Lineto](https://lineto.com/)
+[Material Symbols](https://fonts.google.com/icons)
+[OH no Type Company](https://ohnotype.co/)
+[Pangram Pangram](https://pangrampangram.com/)
+[Production Type](https://productiontype.com/)
+[Schick Toikka](https://schick-toikka.com/)
+[Sharp Type](https://sharptype.co/)
+[Tokotype](https://tokotype.com/)
+[Utopia](https://utopia.fyi/)
+[Velvetyne](https://velvetyne.fr/)
+[Wakamai Fondue](https://wakamaifondue.com/)
+[XYZ Type](https://xyztype.com/fonts)
+===Color + Accessibility
+[APCA](https://www.myndex.com/APCA/)
+[Color.review](http://color.review/)
+[DialKit](https://joshpuckett.me/dialkit)
+[Fffuel](https://fffuel.co/)
+[Huetone](https://huetone.ardov.me/)
+[OKLCH](https://oklch.com/)
+[OKLCH.fyi](http://oklch.fyi/)
+===Icons + Logos
+[Bootstrap Icons](https://icons.getbootstrap.com/)
+[Boxicons](https://boxicons.com/)
+[Carbon Icons](https://carbondesignsystem.com/)
+[css.gg](http://css.gg/)
+[Devicon](https://devicon.dev/)
+[Eva Icons](https://akveo.github.io/eva-icons/)
+[Feather](https://feathericons.com/)
+[Heroicons](https://heroicons.com/)
+[Heroicons Animated](https://heroicons-animated.com/)
+[HugeIcons](https://hugeicons.com/)
+[Icon Foundry](https://iconfoundry.store/)
+[Icon Museum](https://icon.museum/)
+[Iconify](https://iconify.design/)
+[Iconoir](https://iconoir.com/)
+[Icons.download](http://icons.download/)
+[icons0](https://icons0.dev/)
+[Iconsax](https://app.iconsax.io/)
+[Inkword](https://inkword.app/)
+[Ionicons](https://ionic.io/ionicons/)
+[Lucide Animated](https://lucide-animated.com/)
+[MX Icons](https://mx-icons.vercel.app/)
+[Phosphor](https://phosphoricons.com/)
+[Reicon](https://reicon.dev/)
+[Remix Icon](https://remixicon.com/)
+[Rune Icons](https://www.runeicons.com/)
+[Simple Icons](https://simpleicons.org/)
+[Tabler Icons](https://tabler.io/icons)
+[theSVG](https://thesvg.org/)
+===UI Kits
+[21st.dev](http://21st.dev/): community components, pluggable into agents via MCP
+[23rd](https://23rd.dev/)
+[8bitcn](https://8bitcn.com/)
+[Amacro](https://amacro.vercel.app/)
+[Amicro](https://amicro.vercel.app/)
+[Animate UI](https://animate-ui.com/)
+[Animated shadcn/ui](https://shadcn-animated.vercel.app/)
+[Annnimate](https://annnimate.com/)
+[Base CN](https://basecn.dev/)
+[Base UI](https://base-ui.com/)
+[Bearnie](https://bearnie.dev/)
+[Beautiful UI](https://beautifului.dev/)
+[Bencho](https://bencho.dev/)
+[beUI](https://beui.dev/)
+[blocks.so](http://blocks.so/)
+[Butter Nav](https://butter-nav.vercel.app/)
+[Colorion Text Effects](https://text-effects.colorion.co/)
+[Componentry](https://componentry.dev/)
+[coss ui](https://coss.com/ui)
+[crd-ui](https://crd-ui.juanda.co/)
+[cuelume](https://cuelume.dev/)
+[Cult UI](https://www.cult-ui.com/)
+[daisyUI](https://daisyui.com/)
+[devl](https://www.devl.dev/)
+[Dither Kit](https://www.tripwire.sh/dither-kit)
+[Dot Matrix](https://dotmatrix.zzzzshawn.cloud/)
+[Easy UI](https://easyui.pro/)
+[editorcn](https://editorcn.vercel.app/)
+[Eldora UI](https://eldoraui.site/)
+[emailcn](https://emailcn.run/)
+[Evil Buttons](https://www.evilbuttons.com/)
+[Evil Charts](https://evilcharts.com/)
+[Fancy Components](https://www.fancycomponents.dev/)
+[Float UI](https://floatui.com/)
+[Flowbite](https://flowbite.com/)
+[Fluid Functionalism](https://www.fluidfunctionalism.com/)
+[FlyonUI](https://flyonui.com/)
+[ForgeUI](https://forgeui.in/)
+[Frameblox](https://frameblox.com/)
+[framecn](https://framecn.dev/)
+[GetLayers](https://getlayers.ai/)
+[Gradient Border Plugin](https://gradient-border.floriankiem.com/)
+[Gradient Spin](https://gradient-spin.vercel.app/)
+[Great UI](https://www.great-ui.com/)
+[Headless UI](https://headlessui.com/)
+[HeroUI](https://www.heroui.com/)
+[Hexter UI](https://hexter-ui.com/)
+[hyperui.dev](http://hyperui.dev/): free Tailwind sections
+[interior.dev](http://interior.dev/)
+[Kibo UI](https://www.kibo-ui.com/)
+[Kokonut UI](https://kokonutui.com/)
+[Libraries.dev](http://libraries.dev/)
+[Lightswind](https://lightswind.com/)
+[loading.dev](http://loading.dev/)
+[magicui.design](http://magicui.design/): animated components and effects
+[Meraki UI](https://merakiui.com/)
+[Motion Primitives](https://motion-primitives.com/)
+[Nex UI](https://nexui.dev/)
+[Nexvyn UI](https://ui.nexvyn.dev/)
+[Ninja UI](https://ninna-ui.dev/)
+[NumberFlow](https://number-flow.barvian.me/)
+[Odyssey UI](https://www.odysseyui.com/)
+[ogimagecn](https://www.ogimagecn.com/)
+[Oneko](https://oneko.dhrv.pw/)
+[Painterly](https://painterly.design-tools.workers.dev/)
+[pdfcn](https://pdfcn.dev/)
+[Pin UI](https://www.pinui.xyz/)
+[Pinstack](https://www.pinstack.app/components): UI layouts and components.
+[Preline UI](https://preline.co/)
+[Prompt Kit](https://www.prompt-kit.com/)
+[Radix](https://www.radix-ui.com/)
+[Rare UI](https://rareui.com/)
+[Re UI](https://reui.io/)
+[reactbits.dev](http://reactbits.dev/): animated React components
+[Reverse UI](https://reverseui.com/)
+[RewampUI](https://www.rewampui.com/)
+[Rolling Number](https://rolling.kitlangton.dev/)
+[Ruru UI](https://ui.ruru.build/)
+[Scritto](https://scrit.to/)
+[sensory-ui](https://www.sensory-ui.com/)
+[Sera UI](https://seraui.com/)
+[Shadcn Labs](https://www.shadcn-labs.com/)
+[Shadcn Studio](https://shadcnstudio.com/)
+[shadcn-cssinjs](https://www.shadcn-cssinjs.com/)
+[shadcnblocks.com](http://shadcnblocks.com/): pre-built section blocks
+[shieldcn](https://shieldcn.dev/)
+[Shoogle](https://shoogle.dev/)
+[Skiper UI](https://skiper-ui.com/)
+[Smooth UI](https://smoothui.dev/)
+[Sona UI](https://www.sonaui.com/)
+[Sonner](https://sonner.emilkowal.ski/)
+[Spectrum UI](https://ui.spectrumhq.in/)
+[Spell UI](https://spell.sh/)
+[SRCL](https://www.sacred.computer/)
+[startercn](https://startercn.vercel.app/)
+[Syntax UI](https://syntaxui.com/)
+[Tailark](https://tailark.com/)
+[TailGrids](https://tailgrids.com/)
+[termcn](https://termcn.dev/)
+[Transitions](https://transitions.dev/)
+[Tremor](https://tremor.so/)
+[tweakcn.com](http://tweakcn.com/): visual theme editor for shadcn
+[UI Layouts](https://ui-layouts.com/)
+[ui.aceternity.com](http://ui.aceternity.com/): animated React and Tailwind components
+[ui.shadcn.com](http://ui.shadcn.com/): still the gold standard
+[Uiuno](https://uiuno.com/)
+[uiverse.io](http://uiverse.io/): open-source UI elements
+[unlumen UI](https://ui.unlumen.com/)
+[useLayouts](https://uselayouts.com/)
+[Velora UI](https://velora.colorlib.com/)
+[Vengeance UI](https://www.vengeanceui.com/)
+[Watermelon UI](https://watermelon.sh/)
+[⌘K](https://github.com/dip/cmdk)
+===Interface Design + Prototyping
+[Figma](https://figma.com/)
+[Framer](https://framer.com/)
+[Interface Craft](https://www.interfacecraft.dev/)
+[Lab01](https://lab01.dev/)
+[make.design](http://make.design/)
+[Penpot](https://penpot.app/)
+[UI Labs](https://www.uilabs.dev/)
+[UI Playbook](https://uiplaybook.dev/)
+[UIWTF](https://uiw.tf/)
+===Motion + 3D
+[Blender](https://blender.org/)
+[Calligraph](https://calligraph.raphaelsalaja.com/)
+[Devouring Details](https://devouringdetails.com/)
+[Drei](https://drei.docs.pmnd.rs/)
+[Easing Wizard](https://easingwizard.com/)
+[gltf.report](http://gltf.report/)
+[gsap.com](http://gsap.com/): the industry-standard animation engine
+[Images in motion](https://iim.smartsquad.io/)
+[Jitter](https://jitter.video/)
+[lottiefiles.com](http://lottiefiles.com/): ready-made animations
+[morphicons](https://www.morphicons.com/)
+[Morphrig](https://morphrig.dev/)
+[motion.dev](http://motion.dev/): the animation library for React
+[Poly Haven](https://polyhaven.com/)
+[React Three Fiber](https://r3f.docs.pmnd.rs/)
+[rive.app](http://rive.app/): interactive animations
+[shadertoy.com](http://shadertoy.com/): shader inspiration and code
+[spline.design](http://spline.design/): 3D scenes in the browser
+[textmotion](https://textmotion.dev/)
+[Theatre.js](https://www.theatrejs.com/)
+===Shaders + WebGL
+[Book of Shaders](https://thebookofshaders.com/)
+[Canvas UI](https://canvasui.dev/)
+[compute.toys](http://compute.toys/)
+[glimm](https://glimm.dev/)
+[Metalforge](https://metalforge.xyz/)
+[Nexus](https://nexus.synkit.net/)
+[OpenShaders](https://openshaders.com/)
+[Orbkit](https://orbkit.zzzzshawn.cloud/)
+[Paper Shaders](https://shaders.paper.design/)
+[Shader Lab](https://eng.basement.studio/tools/shader-lab)
+[shadercn](https://shadercn.run/)
+[Shaderfrog](https://shaderfrog.com/)
+[Three.js](https://threejs.org/)
+[unicorn.studio](http://unicorn.studio/): WebGL effects without writing shaders
+===Audio + Haptics
+[@web-kits/audio](https://audio.raphaelsalaja.com/)
+[soundcn](https://soundcn.xyz/)
+[WebHaptics](https://haptics.lochie.me/)
+===Video + Capture
+[BetterShot](https://www.bettershot.site/)
+[CleanShot X](https://cleanshot.com/)
+[Cursorful](https://cursorful.com/)
+[DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)
+[Descript](https://descript.com/)
+[Gifski](https://gif.ski/)
+[MOVO](https://movo.video/)
+[Recordly](https://recordly.dev/)
+[Remocn](https://www.remocn.dev/)
+[Remotion](https://remotion.dev/)
+[Screen Studio](https://screen.studio/)
+[Supercut](https://supercut.ai/)
+===Mockups + Presentation
+[Art Directed](https://artdirected.design/)
+[before.click](http://before.click/)
+[Bendito Mockup](https://benditomockup.com/)
+[Brandacle](https://brandacle.com/)
+[Layers](https://layers.design/shop)
+[Lovely and Spotless Graphics](https://ls.graphics/)
+[Maneken](https://maneken.app/)
+[Mockup.Maison](http://mockup.maison/)
+[Mockuuups Studio](https://mockuuups.studio/)
+[Mr.Mockup](https://mrmockup.com/)
+[OGFolio](https://www.ogfolio.com/)
+[Opensource UI](https://opensourceui.in/)
+[Orbyt](https://orbyt.studio/)
+[Pixeden](https://pixeden.com/)
+[PostSpark](https://postspark.app/)
+[Ray.so](http://ray.so/)
+[Rotato](https://rotato.app/)
+[SaaSFrame](https://www.saasframe.io/)
+[Scene Number](https://scenenumbermockup.com/)
+[Screan](https://screan.app/)
+[Screenshot Studio](https://www.screenshot-studio.com/)
+[Scrnshts](https://scrnshts.club/)
+[Sedshop](https://www.sedshop.co/)
+[Slant It](https://slantit.app/)
+[Supaste](https://supaste.com/)
+[Supply Family](https://supply.family/?ref=28524)
+[Tokokino](https://tokokino.com/)
+[ui.camera](http://ui.camera/)
+[Vitora](https://vitoramockup.com/)
+===AI Design + Coding Agents
+[Agentation](https://www.agentation.com/)
+[agentcn](https://agentcn.run/)
+[AICSS](https://aicss.dev/)
+[Arc labs](https://www.arclabs.space/)
+[Aura](https://aura.build/)
+[bb](https://getbb.app/)
+[Capacity](https://capacity.so/)
+[Causal](https://causal.so/)
+[Cursor](https://cursor.com/)
+[designmd.me](http://designmd.me/)
+[designmd.supply](http://designmd.supply/)
+[Distill](https://distill.id/)
+[Dray](https://www.drayhq.com/)
+[Efecto](https://efecto.app/)
+[emilkowalski/skills](https://github.com/emilkowalski/skills)
+[Flavors](https://flavors.design/): Design styles to guide AI coding agents.
+[Foglamp](https://www.foglamp.dev/)
+[fx](https://fx.sh/)
+[getdesign.md](http://getdesign.md/)
+[Ghostex](https://ghostex.dev/)
+[Herdr](https://herdr.dev/)
+[Hyperbrowser](https://design-md.hyperbrowser.ai/)[Design.md](http://design.md/)
+[HyperFrames](https://www.hyperframes.dev/)
+[Impeccable](https://impeccable.style/)
+[integrations.sh](http://integrations.sh/)
+[is-agentic.com](http://is-agentic.com/)
+[jakubkrehel/skills](https://github.com/jakubkrehel/skills)
+[Kombai](https://kombai.com/)
+[Lafys](https://lafys.com/)
+[mcpcn](https://mcpcn.dev/)
+[Neuform](https://neuform.ai/)
+[Open Design](https://open-design.ai/)
+[OpenCode](https://opencode.ai/)
+[rams](https://www.rams.ai/)
+[Scira](https://scira.ai/)
+[skills](https://www.skills.sh/shadcn-labs/skills)
+[SkillSync](https://skillsync.com/)
+[Soubi](https://soubi.vercel.app/)
+[Taste Skill](https://www.tasteskill.dev/)
+[Thinking orbs](https://orbs.jakubantalik.com/)
+[typeui.sh](http://typeui.sh/)
+[UI Skills](https://ui-skills.com/)
+[ui.sh](http://ui.sh/)
+[Webclaw](https://webclaw.io/)
+===Development Tools
+[Alumnium](https://alumnium.ai/)
+[Better T Stack](https://www.better-t-stack.dev/)
+[Biome](https://biomejs.dev/)
+[Bolt.new](http://bolt.new/)
+[BuilderTools](https://www.buildertools.sh/)
+[Claude Code](https://claude.com/claude-code)
+[DialKit](https://www.dialkit.dev/)
+[evlog](https://www.evlog.dev/)
+[Nue](https://nuejs.org/)
+[nuqs](https://nuqs.47ng.com/)
+[OSS Perks](https://ossperks.com/)
+[Playwright](https://playwright.dev/)
+[Torph](https://torph.lochie.me/)
+[v0](https://v0.app/)
+[Vercel Doctor](https://vercel-doctor.com/)
+[Vinext](https://vinext.dev/)
+[Vite](https://vite.dev/)
+[x.ai/bot](http://x.ai/bot)
+[Zed](https://zed.dev/)
+===Creative + Developer Utilities
+[Anim8](https://www.tryanim8.com/)
+[ASCII (Kracked Devs)](https://ascii.krackeddevs.com/)
+[ASCII Studio](https://www.asciistudio.space/)
+[ASCIInator](https://asciinator.app/)
+[Aurorasaur](http://aurorasaur.com/)
+[Butterfly](https://www.butterfly.so/)
+[Code as the Source of Truth](https://www.tonyward.dev/articles/code-as-the-source-of-truth)
+[Corne](https://corne.rs/)
+[Corner Radii](https://corner-radii.xyz/)
+[Design Minis](https://www.designminis.com/)
+[Dither Lab](https://literate-enigma-snowy.vercel.app/)
+[DotForge](https://dotforge.vercel.app/)
+[Drawably](https://www.drawably.dev/)
+[GRADIENTOOL](https://gradientool.com/)
+[Hallmark](https://www.usehallmark.com/)
+[Icoon](https://icoon.co/)
+[kugiri](https://edoardolunardi.github.io/kugiri/)
+[Mascofast](https://mascofast.com/)
+[Mesurer](https://mesurer.dev/)
+[Open Source Together](https://opensource-together.com/)
+[Playgrnd](https://www.playgrnd.tools/)
+[RegExr](https://regexr.com/)
+[Render Labs](https://render-labs.evlog.cloud/)
+[Rynix Studio](https://studio.rynix.in/edit)
+[shadowLab](https://shadowlab.mocarski.design/)
+[Shiori](https://www.shiori.sh/)
+[Squoosh](https://squoosh.app/)
+[SVGOMG](https://svgomg.net/)
+[Tabbied](https://tabbied.com/)
+[Tooooools](https://www.tooooools.app/)
+[Transform](https://transform.tools/)
+[Vessa](https://vessa.design/)
+===Desktop + Productivity
+[Canario](https://rioterm.com/canario)
+[CoolDock](https://cooldock.app/)
+[Ghostty](https://ghostty.org/)
+[Granola](https://granola.ai/)
+[LocalSend](https://localsend.org/)
+[Raycast](https://raycast.com/)
+[Revone](https://revone.app/)
+[Runey](https://runey.app/)
+[Typefully](https://typefully.com/?via=fons)
+[Warp](https://warp.dev/)
+[Zen Browser](https://zen-browser.app/)
+===Whiteboards + Planning
+[Excalidraw](https://excalidraw.com/)
+[Linear](https://linear.app/)
+[Notion](https://www.notion.com/)
+[Obsidian](https://obsidian.md/)
+[tldraw](https://tldraw.com/)
+===Hosting + Deployment
+[Cloudflare](https://developers.cloudflare.com/workers/)
+[Fly.io](http://fly.io/)
+[Netlify](https://netlify.com/)
+[Railway](https://railway.app/)
+[Vercel](https://vercel.com/)
+===Analytics + Feedback
+[abtest.design](http://abtest.design/)
+[Remediate](https://www.remediate.ski/)
+[Replay](https://letsreplay.co/)
+[Tracwell](https://tracwell.app/)
+[Umami](https://umami.is/)
+===Learning + Publications
+[12 Principles of Animation](https://www.raphaelsalaja.com/library/12-principles-of-animation)
+[99designs Discover](https://99designs.com/discover)
+[A Collection of Design Engineers](https://maggieappleton.com/design-engineers)
+[A Five-Minute Guide to Better Typography](https://www.pierrickcalvez.com/journal/a-five-minute-guide-to-better-typography)
+[Abduzeedo](https://abduzeedo.com/)
+[AI for UI](https://aiforui.dev/)
+[Anatomy of AI Input](https://ibelick.com/anatomy-ai-input)
+[Animations.dev](http://animations.dev/)
+[Aperture](https://aperture.org/)
+[Becoming a Design Engineer](https://marcel.io/posts/becoming-a-design-engineer)
+[Boxes and Arrows](https://boxesandarrows.com/)
+[BP&O](https://bpando.org/)
+[Brand New](https://underconsideration.com/brandnew)
+[Codrops](https://tympanus.net/codrops/)
+[Creative Review](https://www.creativereview.co.uk/)
+[Deem](https://deemjournal.com/)
+[Degreeless Design](https://www.degreeless.design/)
+[Design Books](https://designbooks.org/)
+[Design Engineering](https://www.floguo.com/notes/design-engineering)
+[Design Engineering](https://www.designengineer.xyz/design-engineering)
+[Design Engineering at Vercel](https://vercel.com/blog/design-engineering-at-vercel)
+[Design Engineering: A State of Mind](https://blog.designeng.club/p/design-engineering-a-state-of-mind)
+[Design for Engineers](https://didoesdigital.com/project/design-for-engineers/)
+[Design Milk](https://design-milk.com/)
+[Design Principles](https://principles.design/)
+[Designboom](https://www.designboom.com/)
+[Designer News](https://www.designernews.co/)
+[Designmodo](https://designmodo.com/)
+[Details That Make Interfaces Feel Better](https://jakub.kr/writing/details-that-make-interfaces-feel-better)
+[Developing Taste](https://emilkowal.ski/ui/developing-taste)
+[Dezeen](https://dezeen.com/)
+[Disegno](https://disegnodaily.com/)
+[Domus](https://domusweb.it/)
+[Easing Graphs](https://www.easing.dev/)
+[Eye Magazine](https://eyemagazine.com/)
+[Family Values](https://benji.org/family-values)
+[Fonts In Use](https://fontsinuse.com/)
+[Frame](https://frameweb.com/)
+[Frieze](https://frieze.com/)
+[Front-of-the-front-end and back-of-the-front-end web development](https://bradfrost.com/blog/post/front-of-the-front-end-and-back-of-the-front-end-web-development/)
+[Good UI](https://goodui.org/)
+[Hashvatar](https://www.hashvatar.com/)
+[How I Design with AI](https://ref.tools/blog/how-i-design-with-ai)
+[How to become an AI Designer](https://uxdesign.cc/how-to-become-an-ai-designer-ff8ee8aed205)
+[How to scale intent, quality, and artistry with Al](https://www.youtube.com/watch?v=GLvFTMtw4Jk)
+[HTML Can Do That](https://chrisburnell.com/html-can-do-that/)
+[Idea Mag](https://www.idea-mag.com/en/)
+[Inclusive Components](https://inclusive-components.design/)
+[Inter alternatives: How to choose a UI font](https://yeptype.com/article/inter-alternatives)
+[Interface Cheat Sheet](https://interfaces.dev/cheat-sheet)
+[Interfaces](https://interfaces.dev/)
+[Invisible Details of Interaction Design](https://rauno.me/craft/interaction-design)
+[Is AI going to steal my job as a design engineer?](https://twilson.net/writing/ai-design-engineer)
+[It’s Nice That](https://itsnicethat.com/)
+[Josh Comeau](https://joshwcomeau.com/)
+[Learn Kernels](https://learn-kernels.com/)
+[Learn UI](https://learn-ui.com/)
+[Lessons of Design](https://lessons.design/)
+[Limit the number of details](https://design.lightspark.com/limit-the-number-of-details)
+[Liquid Gooey](https://gooey.jakubantalik.com/)
+[liquid-glass](https://glass.samasante.com/)
+[Liveline](https://github.com/benjitaylor/liveline)
+[Making Software](https://www.makingsoftware.com/)
+[Muzli](https://muz.li/)
+[Niche](https://nichedesign.press/)
+[Noia](https://noia.works/)
+[On AI, systems, taste and the human filter](https://shedsgns.me/taste)
+[Practical Typography](https://practicaltypography.com/)
+[Refactoring UI](https://refactoringui.com/)
+[Rockstar Games](https://www.rockstargames.com/careers/openings/position/7767935003)
+[Slanted](https://slanted.de/)
+[Smashing Magazine](https://www.smashingmagazine.com/)
+[SVG Guide](https://www.svg.guide/)
+[The Attributes of a Design Engineer](https://www.ryngonzalez.com/blog/the-attributes-of-a-design-engineer)
+[The Brand Identity](https://the-brandidentity.com/)
+[The Concept of Taste](https://www.raphaelsalaja.com/library/the-concept-of-taste)
+[The Rise of Design Engineering](https://youtu.be/uEMEs499fUs)
+[The Shape of AI](https://www.shapeof.ai/)
+[TYPE01](https://type-01.com/)
+[UI Land](https://ui.land/)
+[User Interface Wiki](https://userinterface.wiki/)
+[Using AI as a Design Engineer](https://jakub.kr/work/using-ai-as-a-design-engineer)
+[UX Collective](https://uxdesign.cc/)
+[Visual Rambling](https://visualrambling.space/)
+[Wallpaper](https://wallpaper.com/)
+[Web Designer Depot](https://www.webdesignerdepot.com/)
+[Web Interface Guidelines](https://interfaces.rauno.me/)
+[web.dev](http://web.dev/)
+[You Don't Need Animations](https://emilkowal.ski/ui/you-dont-need-animations)
+===Studios + Creators
+[Alaska Alaska](https://alaska---alaska.com/)
+[Bakers Studio](https://bakers.studio/)
+[Basement Studio](https://basement.studio/)
+[BMD](https://brucemaudesign.com/)
+[BOND NY](https://bond-ny.com/projects)
+[COLLINS](https://wearecollins.com/)
+[DIA](https://dia.studio/)
+[Emil Kowalski](https://emilkowal.ski/)
+[floguo](https://www.floguo.com/)
+[Heydays](https://heydays.no/)
+[Jakub Krehel](https://jakub.kr/)
+[Koto](https://koto.com/)
+[Mouthwash](https://mouthwash.studio/)
+[Offgrid](https://offgrid.inc/)
+[Pentagram](https://pentagram.com/)
+[Porto Rocha](https://portorocha.com/)
+[RaggedEdge](https://raggededge.com/)
+[Rauno Freiberg](https://rauno.me/)
+[Studio Dumbar](https://studiodumbar.com/)
+===Communities + Careers
+[Autumn](https://findautumn.com/careers/design-engineer)
+[Design Engineer Jobs](https://designengineer.io/)
+[Design Engineering 101](https://www.designdisciplin.com/p/design-engineering-101)
+[Design Engineering Club](https://designeng.club/)
+[Resend](https://resend.com/careers/9b68ba51-3895-4d29-8fd1-364bdf8956e7)
+[Zed](https://zed.dev/jobs/product-designer)
+  </script>
+
+  <script>
+    (function () {
+      const rawText = document.getElementById('raw-directory-data').textContent.trim();
+      const categories = [];
+      const allResources = [];
+      let currentCategory = null;
+
+      // Parse the raw markdown directory lines
+      const lines = rawText.split(/\r?\n/);
+      for (const rawLine of lines) {
+        const line = rawLine.trim();
+        if (!line) continue;
+
+        if (line.startsWith('===')) {
+          const catName = line.slice(3).trim();
+          currentCategory = {
+            id: catName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+            name: catName,
+            items: []
+          };
+          categories.push(currentCategory);
+          continue;
+        }
+
+        if (!currentCategory) continue;
+
+        // Match one or two markdown links on a line, plus optional ": description"
+        const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+        const matches = [...line.matchAll(linkRegex)];
+        if (matches.length > 0) {
+          const primary = matches[0];
+          const title = primary[1].trim();
+          const url = primary[2].trim();
+
+          let secondaryLink = null;
+          if (matches.length > 1) {
+            secondaryLink = {
+              title: matches[1][1].trim(),
+              url: matches[1][2].trim()
+            };
+          }
+
+          // Extract description after the last ")"
+          const lastParenIndex = line.lastIndexOf(')');
+          let desc = '';
+          if (lastParenIndex !== -1 && lastParenIndex < line.length - 1) {
+            desc = line.slice(lastParenIndex + 1).replace(/^:\s*/, '').replace(/\|$/, '').trim();
+          }
+
+          let domain = '';
+          try {
+            const parsedUrl = new URL(url);
+            domain = parsedUrl.hostname.replace(/^www\./, '');
+          } catch (e) {
+            domain = url;
+          }
+
+          const item = {
+            id: `${currentCategory.id}__${title}__${url}`,
+            title,
+            url,
+            domain,
+            description: desc,
+            secondaryLink,
+            category: currentCategory.name,
+            categoryId: currentCategory.id
+          };
+
+          currentCategory.items.push(item);
+          allResources.push(item);
+        }
+      }
+
+      // State
+      const FAVORITES_KEY = 'de_directory_favorites_v1';
+      let favorites = new Set(JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]'));
+      let activeTabId = categories[0]?.id || 'all';
+      let searchQuery = '';
+      let isListView = false;
+
+      // Elements
+      const tabsContainer = document.getElementById('tabsContainer');
+      const resourcesContainer = document.getElementById('resourcesContainer');
+      const activeCategoryTitle = document.getElementById('activeCategoryTitle');
+      const activeCategoryStats = document.getElementById('activeCategoryStats');
+      const totalCountBadge = document.getElementById('totalCountBadge');
+      const searchInput = document.getElementById('searchInput');
+      const wrapTabsBtn = document.getElementById('wrapTabsBtn');
+      const viewModeBtn = document.getElementById('viewModeBtn');
+      const viewModeLabel = document.getElementById('viewModeLabel');
+      const themeBtn = document.getElementById('themeBtn');
+      const prevCatBtn = document.getElementById('prevCatBtn');
+      const nextCatBtn = document.getElementById('nextCatBtn');
+      const randomBtn = document.getElementById('randomBtn');
+
+      totalCountBadge.textContent = `${allResources.length} resources`;
+
+      function saveFavorites() {
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites]));
+      }
+
+      function getAllTabDefinitions() {
+        return [
+          ...categories.map(c => ({ id: c.id, name: c.name, count: c.items.length })),
+          { id: 'all', name: 'All Resources', count: allResources.length },
+          { id: 'saved', name: '★ Saved', count: favorites.size }
+        ];
+      }
+
+      function renderTabs() {
+        const tabs = getAllTabDefinitions();
+        tabsContainer.innerHTML = '';
+
+        for (const tab of tabs) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `tab-btn ${tab.id === activeTabId ? 'active' : ''}`;
+          btn.dataset.tabId = tab.id;
+          btn.innerHTML = `
+            <span>${escapeHtml(tab.name)}</span>
+            <span class="tab-count">${tab.count}</span>
+          `;
+          btn.addEventListener('click', () => {
+            setActiveTab(tab.id);
+          });
+          tabsContainer.appendChild(btn);
+        }
+      }
+
+      function setActiveTab(tabId, updateHash = true) {
+        activeTabId = tabId;
+        if (updateHash) {
+          history.replaceState(null, '', `#${tabId}`);
+        }
+        renderTabs();
+        renderResources();
+      }
+
+      function getFilteredResources() {
+        let baseList = [];
+        if (activeTabId === 'all') {
+          baseList = allResources;
+        } else if (activeTabId === 'saved') {
+          baseList = allResources.filter(item => favorites.has(item.id));
+        } else {
+          const cat = categories.find(c => c.id === activeTabId);
+          baseList = cat ? cat.items : allResources;
+        }
+
+        if (!searchQuery.trim()) {
+          return baseList;
+        }
+
+        const q = searchQuery.toLowerCase().trim();
+        return baseList.filter(item =>
+          item.title.toLowerCase().includes(q) ||
+          item.domain.toLowerCase().includes(q) ||
+          item.description.toLowerCase().includes(q) ||
+          item.category.toLowerCase().includes(q) ||
+          (item.secondaryLink && item.secondaryLink.title.toLowerCase().includes(q))
+        );
+      }
+
+      function renderResources() {
+        const filtered = getFilteredResources();
+        const tabs = getAllTabDefinitions();
+        const activeTabObj = tabs.find(t => t.id === activeTabId) || tabs[0];
+
+        activeCategoryTitle.textContent = activeTabObj.name;
+        if (searchQuery.trim()) {
+          activeCategoryStats.textContent = `Found ${filtered.length} matching "${searchQuery}" in ${activeTabObj.name}`;
+        } else {
+          activeCategoryStats.textContent = `Showing ${filtered.length} curated ${filtered.length === 1 ? 'resource' : 'resources'}`;
+        }
+
+        resourcesContainer.className = isListView ? 'resources-list' : 'resources-grid';
+        resourcesContainer.innerHTML = '';
+
+        if (filtered.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'empty-state';
+          if (activeTabId === 'saved' && !searchQuery.trim()) {
+            empty.innerHTML = `
+              <h3>No saved resources yet</h3>
+              <p>Click the ★ star icon on any resource card to bookmark it here for quick access.</p>
+            `;
+          } else {
+            empty.innerHTML = `
+              <h3>No matching resources in "${escapeHtml(activeTabObj.name)}"</h3>
+              <p>Try searching across <button class="btn" id="searchAllFallbackBtn" style="margin: 0 4px; padding: 4px 10px;">All ${allResources.length} Resources</button> or clearing your search filter.</p>
+            `;
+          }
+          resourcesContainer.appendChild(empty);
+          const fallbackBtn = document.getElementById('searchAllFallbackBtn');
+          if (fallbackBtn) {
+            fallbackBtn.addEventListener('click', () => setActiveTab('all'));
+          }
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        for (const item of filtered) {
+          const isStarred = favorites.has(item.id);
+          const card = document.createElement('a');
+          card.href = item.url;
+          card.target = '_blank';
+          card.rel = 'noopener noreferrer';
+          card.className = 'card';
+
+          const initial = (item.title.replace(/[^a-zA-Z0-9]/g, '')[0] || item.title[0] || '?').toUpperCase();
+          const faviconUrl = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(item.domain)}&sz=64`;
+
+          const showFooter = (activeTabId === 'all' || activeTabId === 'saved' || item.secondaryLink);
+
+          card.innerHTML = `
+            <div>
+              <div class="card-top">
+                <div class="card-identity">
+                  <div class="favicon-box">
+                    <img src="${faviconUrl}" alt="" loading="lazy" onerror="this.remove(); this.parentElement.textContent='${initial}';" />
+                  </div>
+                  <div class="card-title-wrap">
+                    <div class="card-title" title="${escapeHtml(item.title)}">${escapeHtml(item.title)}</div>
+                    <div class="card-domain" title="${escapeHtml(item.url)}">${escapeHtml(item.domain)}</div>
+                  </div>
+                </div>
+                <div class="card-actions">
+                  <button type="button" class="star-btn ${isStarred ? 'starred' : ''}" title="${isStarred ? 'Remove from Saved' : 'Save resource'}" aria-label="Bookmark">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="${isStarred ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                  </button>
+                  <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </div>
+              ${item.description ? `<div class="card-desc">${escapeHtml(item.description)}</div>` : ''}
+            </div>
+            ${showFooter ? `
+              <div class="card-footer">
+                ${(activeTabId === 'all' || activeTabId === 'saved')
+                  ? `<span class="cat-tag" data-goto-cat="${item.categoryId}">${escapeHtml(item.category)}</span>`
+                  : '<span></span>'}
+                ${item.secondaryLink
+                  ? `<span class="extra-link" data-extra-url="${escapeAttr(item.secondaryLink.url)}">↗ ${escapeHtml(item.secondaryLink.title)}</span>`
+                  : ''}
+              </div>
+            ` : ''}
+          `;
+
+          // Star button click handler
+          const starBtn = card.querySelector('.star-btn');
+          starBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (favorites.has(item.id)) {
+              favorites.delete(item.id);
+            } else {
+              favorites.add(item.id);
+            }
+            saveFavorites();
+            renderTabs();
+            renderResources();
+          });
+
+          // Category tag click handler
+          const catTag = card.querySelector('.cat-tag');
+          if (catTag) {
+            catTag.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setActiveTab(catTag.dataset.gotoCat);
+            });
+          }
+
+          // Secondary link click handler
+          const extraLink = card.querySelector('.extra-link');
+          if (extraLink) {
+            extraLink.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.open(extraLink.dataset.extraUrl, '_blank', 'noopener,noreferrer');
+            });
+          }
+
+          fragment.appendChild(card);
+        }
+
+        resourcesContainer.appendChild(fragment);
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function escapeAttr(str) {
+        return escapeHtml(str);
+      }
+
+      // Event Listeners
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderResources();
+      });
+
+      wrapTabsBtn.classList.add('active');
+      wrapTabsBtn.addEventListener('click', () => {
+        tabsContainer.classList.toggle('wrap-tabs');
+        wrapTabsBtn.classList.toggle('active', tabsContainer.classList.contains('wrap-tabs'));
+      });
+
+      viewModeBtn.addEventListener('click', () => {
+        isListView = !isListView;
+        viewModeBtn.classList.toggle('active', isListView);
+        viewModeLabel.textContent = isListView ? 'Grid View' : 'List View';
+        renderResources();
+      });
+
+      themeBtn.addEventListener('click', () => {
+        document.documentElement.classList.toggle('light');
+      });
+
+      function switchAdjacentTab(delta) {
+        const tabs = getAllTabDefinitions();
+        const idx = tabs.findIndex(t => t.id === activeTabId);
+        const nextIdx = (idx + delta + tabs.length) % tabs.length;
+        setActiveTab(tabs[nextIdx].id);
+      }
+
+      prevCatBtn.addEventListener('click', () => switchAdjacentTab(-1));
+      nextCatBtn.addEventListener('click', () => switchAdjacentTab(1));
+
+      randomBtn.addEventListener('click', () => {
+        const list = getFilteredResources();
+        if (list.length > 0) {
+          const pick = list[Math.floor(Math.random() * list.length)];
+          window.open(pick.url, '_blank', 'noopener,noreferrer');
+        }
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+          searchInput.select();
+        } else if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+          searchInput.select();
+        } else if (e.key === 'Escape' && document.activeElement === searchInput) {
+          if (searchInput.value) {
+            searchInput.value = '';
+            searchQuery = '';
+            renderResources();
+          } else {
+            searchInput.blur();
+          }
+        } else if (document.activeElement !== searchInput) {
+          if (e.key === 'ArrowLeft') {
+            switchAdjacentTab(-1);
+          } else if (e.key === 'ArrowRight') {
+            switchAdjacentTab(1);
+          }
+        }
+      });
+
+      // Initialize from URL hash if present
+      const initialHash = location.hash.replace(/^#/, '');
+      if (initialHash && getAllTabDefinitions().some(t => t.id === initialHash)) {
+        activeTabId = initialHash;
+      }
+
+      renderTabs();
+      renderResources();
+    })();
+  </script>
+</body>
+</html>
